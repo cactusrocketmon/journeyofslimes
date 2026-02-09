@@ -1,1 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jos Game</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: url('bg.png') no-repeat center center fixed;
+      background-size: cover;
+      font-family: system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2.5rem;
+      color: #fff;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1.1rem 2.4rem;
+      font-size: 1.25rem;
+      font-weight: bold;
+      text-decoration: none;
+      color: white;
+      background: #ff6200;
+      border: 2px solid #ff6200;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.22s ease;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+    }
+
+    .btn:hover {
+      background: #ff8533;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.45);
+    }
+
+    .btn:active {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    .btn-download {
+      background: #ff6200;
+      border-color: #ff6200;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="buttons">
+    <a href="jos.html" class="btn">Play Online</a>
+    
+    <a href="jos.html" 
+       class="btn btn-download"
+       download="jos.html">
+       Download
+    </a>
+  </div>
+
+</body>
+</html>
 
