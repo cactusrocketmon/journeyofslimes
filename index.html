@@ -4,24 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Journey of Slimes</title>
-
-  <!-- Basic favicon (uses your PNG). Many browsers support PNG favicons directly. -->
   <link rel="icon" type="image/png" href="icon.png" />
-
-  <!-- Optional: higher-resolution icons for various sizes (only if you have them). 
-       Browsers pick the best match automatically. If you only have icon.png,
-       you can keep just the first line above. -->
-  <!-- <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png"> -->
-  <!-- <link rel="icon" type="image/png" sizes="48x48" href="icon-48.png"> -->
-  <!-- <link rel="icon" type="image/png" sizes="96x96" href="icon-96.png"> -->
-  <!-- <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png"> -->
-
-  <!-- Apple touch icon (homescreen icon on iOS). If you only have icon.png, this will still work. -->
   <link rel="apple-touch-icon" href="icon.png" />
-
-  <!-- Safari pinned tab (macOS). Requires a monochrome SVG. Omit if you don't have it. -->
-  <!-- <link rel="mask-icon" href="icon.svg" color="#ff6200"> -->
-
   <style>
     body {
       margin: 0;
@@ -29,12 +13,39 @@
       background: url('bg.png') no-repeat center center fixed;
       background-size: cover;
       font-family: system-ui, sans-serif;
+      color: #fff;
+      position: relative;           /* ← important for absolute positioning */
+    }
+
+    /* Language button in top-right corner */
+    #langBtn {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      z-index: 10;
+      padding: 0.8rem 1.6rem;
+      font-size: 1.1rem;
+      min-width: 140px;
+      background: #4a6bff;
+      border-color: #4a6bff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    #langBtn:hover {
+      background: #6a88ff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+
+    /* Centered content area */
+    .main-content {
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       gap: 2.5rem;
-      color: #fff;
+      padding: 5rem 1rem 2rem;     /* give space at top for the lang button */
     }
 
     .buttons {
@@ -78,11 +89,60 @@
 </head>
 <body>
 
-  <div class="buttons">
-    <a href="jos.html" class="btn">Play Online</a>
-    <a href="jos.html" class="btn btn-download" download="jos.html">Download</a>
+  <!-- Language button moved to top-right -->
+  <button id="langBtn" class="btn">切換中文</button>
+
+  <div class="main-content">
+    <div class="buttons">
+      <a id="playBtn" href="jos.html" class="btn">Play Online</a>
+      <a id="downloadBtn" href="jos.html" class="btn btn-download" download="jos.html">Download</a>
+    </div>
   </div>
+
+  <script>
+    // ── same script as before ──
+    const playBtn     = document.getElementById('playBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const langBtn     = document.getElementById('langBtn');
+
+    const texts = {
+      en: {
+        play:     "Play Online",
+        download: "Download",
+        lang:     "切換中文",
+        file:     "jos.html"
+      },
+      zh: {
+        play:     "線上遊玩",
+        download: "下載遊戲",
+        lang:     "Switch to English",
+        file:     "josc.html"
+      }
+    };
+
+    let currentLang = localStorage.getItem('lang') || 'en';
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('lang', lang);
+
+      const t = texts[lang];
+
+      playBtn.textContent     = t.play;
+      downloadBtn.textContent = t.download;
+      langBtn.textContent     = t.lang;
+
+      playBtn.href     = t.file;
+      downloadBtn.href = t.file;
+      downloadBtn.download = t.file;
+    }
+
+    langBtn.addEventListener('click', () => {
+      setLanguage(currentLang === 'en' ? 'zh' : 'en');
+    });
+
+    setLanguage(currentLang);
+  </script>
 
 </body>
 </html>
-
